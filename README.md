@@ -1,5 +1,5 @@
 # *Draconian Worldbuilder*
-## [Project Concept](github.com/Draconics/csc493-hohlm/blob/main/concept.md)
+## [Project Concept](concept.md)
 
 ## Scope
 
