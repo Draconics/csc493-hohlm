@@ -5,6 +5,8 @@
 
 Primary features I need are world processing, file storage, and the ability to link pages to gether. Secondary features I need, is a modifiable table of prices for a basic economic market; with multiplers on various things to adjust it (For example: adjusting all weapons as the price of metal increases; due to a mine collapse). This table should allow for easy converting modern day USD, and a set of sample currencies (Such as English £sd).
 
+[SRS](requirements.md)
+
 ## Vision
 
 This application should allow for easy world building; with advanced notes and a built-in economic manager.
