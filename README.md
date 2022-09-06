@@ -1,11 +1,11 @@
-# *Replace with YourProposedProposedProjectName*
+# *Draconian Worldbuilder*
 ## Description/Motivation
 
-Your formally written project proposal description, and why it is useful/interesting/fun goes here. Try to be as descriptive as possible, as we will be discussing your project ideas during the brainstorming in class.
+This will be a worldbuilding software for fantasy authors.  The primary use of such a software is to allow authors to keep efficient notes as they write their stories, and build the world that contains them. As such; it will need a word processor, a file storage system, and the ability to link pages via hyperlink. I also intend to include a focus on the economic aspect of worldbuilding.  To support that, I will implement a few tables with currency converters using multiple different currency systems (such as English £sd and D&D's GP); with an API to keep it updated. 
 
 ### Prerequisites
 
-What is likely to be needed to install and to run *YourProposedProjectName* go here. If nothing is required (i.e. it is a website), state so.
+This application will most likely run natively on windows machines.
 
 ## Built With
 
@@ -15,7 +15,7 @@ What is likely to be needed to install and to run *YourProposedProjectName* go h
 
 ## Author
 
-- **Your name**: *YourProposadProjectName* [yourLinkedIn or yourGithub profile](https://adrress)
+- Michael Hohl: *Draconican Worldbuilder* [Draconics](https://github.com/Draconics)
 
 ## Acknowledgments
 
@@ -25,5 +25,5 @@ What is likely to be needed to install and to run *YourProposedProjectName* go h
 
 ## License (not required initially)
 
-This project is licensed under the ??? License - see the wiki page (https://en.wikipedia.org/wiki/Software_license) for details
+This project is licensed under the Copyleft License - see the wiki page (https://en.wikipedia.org/wiki/Software_license) for details
 
