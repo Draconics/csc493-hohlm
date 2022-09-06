@@ -1,7 +1,13 @@
 # *Draconian Worldbuilder*
-## Description/Motivation
+## [Project Concept](github.com/Draconics/csc493-hohlm/blob/main/concept.md)
 
-This will be a worldbuilding software for fantasy authors.  The primary use of such a software is to allow authors to keep efficient notes as they write their stories, and build the world that contains them. As such; it will need a word processor, a file storage system, and the ability to link pages via hyperlink. I also intend to include a focus on the economic aspect of worldbuilding.  To support that, I will implement a few tables with currency converters using multiple different currency systems (such as English £sd and D&D's GP); with an API to keep it updated. 
+## Scope
+
+Primary features I need are world processing, file storage, and the ability to link pages to gether. Secondary features I need, is a modifiable table of prices for a basic economic market; with multiplers on various things to adjust it (For example: adjusting all weapons as the price of metal increases; due to a mine collapse). This table should allow for easy converting modern day USD, and a set of sample currencies (Such as English £sd).
+
+## Vision
+
+This application should allow for easy world building; with advanced notes and a built-in economic manager.
 
 ### Prerequisites
 
