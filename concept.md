@@ -1,5 +1,6 @@
 # Project Proposal
 ## *Draconian Worldbuilder*
+## [Readme](README.md)
 
 ## Goals:
 The goal of this project is to aid in the development of fantasy worlds.
