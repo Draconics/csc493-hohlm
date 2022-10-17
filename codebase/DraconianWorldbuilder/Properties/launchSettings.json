@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "DraconianWorldbuilder (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "DraconianWorldbuilder (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

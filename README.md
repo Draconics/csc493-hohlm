@@ -17,9 +17,9 @@ This application will most likely run natively on windows machines.
 
 ## Built With
 
-- [afreamework1](http://www.aframework1.io/): A framework that is likly to be used goes here.
+- [WinUi3](https://learn.microsoft.com/en-us/windows/apps/winui/winui3/): Windows UI framework.
 - [afreamework2](http://www.aframework2.io/): A second framework that is likly to be used goes here.
-- IDE, if applicable
+- Virtual Studio
 
 ## Author
 
