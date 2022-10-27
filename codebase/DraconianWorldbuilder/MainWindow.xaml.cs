@@ -17,6 +17,7 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.System;
 using WinRT.Interop;
+using static System.Net.WebRequestMethods;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -31,11 +32,9 @@ namespace DraconianWorldbuilder
         public MainWindow()
         {
             this.InitializeComponent();
-            string titleText = TitleBox.Text;
-            string summaryText = SummaryBox.Text;
         }
 
-        private async void loadFile(string filePath)
+        private async void LoadFile(string filePath)
         {
             StorageFile file = await StorageFile.GetFileFromPathAsync(filePath);
             if (file != null)
@@ -43,12 +42,11 @@ namespace DraconianWorldbuilder
                 try
                 {
                     //IRandomAccessStreamWithContentType
-                    var randAccStream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
-
+                    Windows.Storage.Streams.IRandomAccessStream randAccStream = await file.OpenAsync(FileAccessMode.Read);
                     // Load the file into the Document property of the RichEditBox.
                     editor.Document.LoadFromStream(Microsoft.UI.Text.TextSetOptions.FormatRtf, randAccStream);
 
-                    using (var sr = new StreamReader(randAccStream.AsStream()))
+                    using (StreamReader sr = new(randAccStream.AsStream()))
                     {
                         // find final }
                         int count = 0, stop = 0;
@@ -77,21 +75,16 @@ namespace DraconianWorldbuilder
                         links.Clear();
                         while (!sr.EndOfStream)
                         {
-                            HyperlinkButton linkButton = new HyperlinkButton();
-                            linkButton.Content = sr.ReadLine();
-                            linkButton.Click += (Link_Click);
-
-                            links.Add(sr.ReadLine());
-                            int slot = links.Count - 1;
-                            linkButton.Name = "" + slot;
-
-                            linkButtonList.Children.Add(linkButton);
+                            String linkText = sr.ReadLine();
+                            String linkFile = sr.ReadLine();
+                            Generate_Link(linkText, linkFile);
                         }
                     }
+                    LinkBox.Text = "";
                 }
                 catch (Exception)
                 {
-                    ContentDialog errorDialog = new ContentDialog()
+                    ContentDialog errorDialog = new()
                     {
                         Title = "File open error",
                         Content = "Sorry, I couldn't open the file.",
@@ -105,52 +98,52 @@ namespace DraconianWorldbuilder
 
         private async void OpenButton_Click(object sender, RoutedEventArgs e)
         {
-            var openPicker = new FileOpenPicker
+            FileOpenPicker openPicker = new()
             {
                 SuggestedStartLocation = PickerLocationId.DocumentsLibrary
             };
             openPicker.FileTypeFilter.Add(".rtf");
 
             // Get the current window's HWND by passing in the Window object
-            var hwnd = WindowNative.GetWindowHandle(this);
+            IntPtr hwnd = WindowNative.GetWindowHandle(this);
             // Associate the HWND with the file picker
             InitializeWithWindow.Initialize(openPicker, hwnd);
 
-            var file = await openPicker.PickSingleFileAsync();
+            StorageFile file = await openPicker.PickSingleFileAsync();
             string filePath = file.Path;
-            loadFile(filePath);
+            LoadFile(filePath);
         }
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            var savePicker = new FileSavePicker
+            FileSavePicker savePicker = new()
             {
                 SuggestedStartLocation = PickerLocationId.DocumentsLibrary,
                 SuggestedFileName = "New Document"
             };
             savePicker.FileTypeChoices.Add("Rich Text", new List<string>() { ".rtf" });
 
-            var hwnd = WindowNative.GetWindowHandle(this);
+            IntPtr hwnd = WindowNative.GetWindowHandle(this);
             InitializeWithWindow.Initialize(savePicker, hwnd);
 
-            Windows.Storage.StorageFile file = await savePicker.PickSaveFileAsync();
+            StorageFile file = await savePicker.PickSaveFileAsync();
             if (file != null)
             {
                 // Prevent updates to the remote version of the file until we
                 // finish making changes and call CompleteUpdatesAsync.
-                Windows.Storage.CachedFileManager.DeferUpdates(file);
+                CachedFileManager.DeferUpdates(file);
 
                 // Write to file
-                var randAccStream = await file.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite);
+                Windows.Storage.Streams.IRandomAccessStream randAccStream = await file.OpenAsync(FileAccessMode.ReadWrite);
                 editor.Document.SaveToStream(Microsoft.UI.Text.TextGetOptions.FormatRtf, randAccStream);
 
-                using (var sw = new StreamWriter(randAccStream.AsStream()))
+                using (StreamWriter sw = new(randAccStream.AsStream()))
                 {
                     sw.WriteLine();
                     sw.WriteLine(TitleBox.Text);
                     sw.WriteLine(SummaryBox.Text);
                     //Woo. Now we need to get a list of children
-                    foreach(HyperlinkButton hypeButt in linkButtonList.Children)
+                    foreach(HyperlinkButton hypeButt in linkButtonList.Children.Cast<HyperlinkButton>())
                     {
                         sw.WriteLine(hypeButt.Content);
                         int index = Int32.Parse(hypeButt.Name);
@@ -160,53 +153,82 @@ namespace DraconianWorldbuilder
 
                 // Let Windows know that we're finished changing the file so the
                 // other app can update the remote version of the file.
-                Windows.Storage.Provider.FileUpdateStatus status = await Windows.Storage.CachedFileManager.CompleteUpdatesAsync(file);
+                Windows.Storage.Provider.FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
                 if (status != Windows.Storage.Provider.FileUpdateStatus.Complete)
                 {
-                    var errorBox = new Windows.UI.Popups.MessageDialog("File " + file.Name + " couldn't be saved.");
+                    Windows.UI.Popups.MessageDialog errorBox = new("File " + file.Name + " couldn't be saved.");
                     await errorBox.ShowAsync();
                 }
             }
         }
 
+        private List<string> links = new();
+
+        private void Generate_Link(string linkText, string filePath)
+        {
+            // Backend indexing of the file path
+            links.Add(filePath);
+            int index = links.Count - 1;
+
+            StackPanel leStack = new()
+            {
+                Orientation = Orientation.Horizontal,
+                Name = "s" + index
+            };
+
+            Button killButton = new()
+            {
+                Name = "k" + index
+            };
+            killButton.Click += KillButton_Click;
+
+            HyperlinkButton linkButton = new()
+            {
+                Content = linkText,
+                Name = "l" + index
+            };
+            linkButton.Click += Link_Click;
+
+            leStack.Children.Add(killButton);
+            leStack.Children.Add(linkButton);
+            linkButtonList.Children.Add(leStack);
+        }
+
         private async void LinkButton_Click(object sender, RoutedEventArgs e)
         {
-            //Microsoft.UI.Text.ITextSelection selectedText = editor.Document.Selection;
             if (LinkBox.Text != "")
             {
-                var openPicker = new FileOpenPicker
+                // File picker business
+                FileOpenPicker openPicker = new()
                 {
                     SuggestedStartLocation = PickerLocationId.DocumentsLibrary
                 };
                 openPicker.FileTypeFilter.Add(".rtf");
-                var hwnd = WindowNative.GetWindowHandle(this);
+                IntPtr hwnd = WindowNative.GetWindowHandle(this);
                 InitializeWithWindow.Initialize(openPicker, hwnd);
 
-                var file = await openPicker.PickSingleFileAsync();
+                StorageFile file = await openPicker.PickSingleFileAsync();
                 if (file != null)
                 {
-                    HyperlinkButton linkButton = new HyperlinkButton();
-                    linkButton.Content = LinkBox.Text;
-                    linkButton.Click += (Link_Click);
-                    // This returns the filepath the link should path to
-                    string filePath = file.Path;
-
-                    links.Add(filePath);
-                    int index = links.Count-1;
-                    linkButton.Name = "" + index;
-
-                    linkButtonList.Children.Add(linkButton);
+                    Generate_Link(LinkBox.Text, file.Path);
                 }
             }
         }
 
-        private List<string> links = new List<string>();
-
         private void Link_Click(object sender, RoutedEventArgs e)
         {
-            int index = Int32.Parse((sender as HyperlinkButton).Name);
+            int index = Int32.Parse(s: (sender as HyperlinkButton).Name[1..]);
             string filePath = links[index];
-            loadFile(filePath);
+            LoadFile(filePath);
+        }
+
+        private void KillButton_Click(object sender, RoutedEventArgs e)
+        {
+            int index = Int32.Parse(s: (sender as Button).Name[1..]);
+            String name = "s" + index;
+            object leStack = linkButtonList.FindName(name);
+            StackPanel sp = (StackPanel)leStack;
+            linkButtonList.Children.Remove(sp);
         }
 
         private void BoldButton_Click(object sender, RoutedEventArgs e)
