@@ -35,20 +35,9 @@ namespace DraconianWorldbuilder
             string summaryText = SummaryBox.Text;
         }
 
-        private async void OpenButton_Click(object sender, RoutedEventArgs e)
+        private async void loadFile(string filePath)
         {
-            var openPicker = new FileOpenPicker
-            {
-                SuggestedStartLocation = PickerLocationId.DocumentsLibrary
-            };
-            openPicker.FileTypeFilter.Add(".rtf");
-
-            // Get the current window's HWND by passing in the Window object
-            var hwnd = WindowNative.GetWindowHandle(this);
-            // Associate the HWND with the file picker
-            InitializeWithWindow.Initialize(openPicker, hwnd);
-
-            var file = await openPicker.PickSingleFileAsync();
+            StorageFile file = await StorageFile.GetFileFromPathAsync(filePath);
             if (file != null)
             {
                 try
@@ -59,127 +48,9 @@ namespace DraconianWorldbuilder
                     // Load the file into the Document property of the RichEditBox.
                     editor.Document.LoadFromStream(Microsoft.UI.Text.TextSetOptions.FormatRtf, randAccStream);
 
-                    using (var sr = new StreamReader(randAccStream.AsStream())) {
-                        // find final }
-                        int count = 0, stop = 0;
-                        while (stop < 1){
-                            string junk = sr.ReadLine();
-                            for (int i = 0; i < junk.Length; i++)
-                            {
-                                if (junk[i] == '{')
-                                {
-                                    count++;
-                                }
-                                else if (junk[i] == '}')
-                                {
-                                    count--;
-                                }
-                            }
-                            if (count == 0)
-                                stop++;
-                        }
-                        sr.ReadLine();
-                        TitleBox.Text = sr.ReadLine();
-                        SummaryBox.Text = sr.ReadLine();
-                    }
-                }
-                catch (Exception)
-                {
-                    ContentDialog errorDialog = new ContentDialog()
-                    {
-                        Title = "File open error",
-                        Content = "Sorry, I couldn't open the file.",
-                        PrimaryButtonText = "Ok"
-                    };
-
-                    await errorDialog.ShowAsync();
-                }
-            }
-        }
-
-        private async void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            var savePicker = new FileSavePicker
-            {
-                SuggestedStartLocation = PickerLocationId.DocumentsLibrary,
-                SuggestedFileName = "New Document"
-            };
-            savePicker.FileTypeChoices.Add("Rich Text", new List<string>() { ".rtf" });
-
-            var hwnd = WindowNative.GetWindowHandle(this);
-            InitializeWithWindow.Initialize(savePicker, hwnd);
-
-            Windows.Storage.StorageFile file = await savePicker.PickSaveFileAsync();
-            if (file != null)
-            {
-                // Prevent updates to the remote version of the file until we
-                // finish making changes and call CompleteUpdatesAsync.
-                Windows.Storage.CachedFileManager.DeferUpdates(file);
-                
-                // Write to file
-                var randAccStream = await file.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite);
-                editor.Document.SaveToStream(Microsoft.UI.Text.TextGetOptions.FormatRtf, randAccStream);
-
-                using (var sw = new StreamWriter(randAccStream.AsStream()))
-                {
-                    sw.WriteLine();
-                    sw.WriteLine(TitleBox.Text);
-                    sw.WriteLine(SummaryBox.Text);
-                }
-
-                // Let Windows know that we're finished changing the file so the
-                // other app can update the remote version of the file.
-                Windows.Storage.Provider.FileUpdateStatus status = await Windows.Storage.CachedFileManager.CompleteUpdatesAsync(file);
-                if (status != Windows.Storage.Provider.FileUpdateStatus.Complete)
-                {
-                    var errorBox = new Windows.UI.Popups.MessageDialog("File " + file.Name + " couldn't be saved.");
-                    await errorBox.ShowAsync();
-                }
-            }
-        }
-
-        private void LinkButton_Click(object sender, RoutedEventArgs e)
-        {
-            Microsoft.UI.Text.ITextSelection selectedText = editor.Document.Selection;
-            if (selectedText != null && LinkBox.Text != "")
-            {
-                // hyperlink is the 'button', run is text on the button 
-                Hyperlink hyperlink = new Hyperlink();
-                Run run = new Run();
-                run.Text = selectedText.Text;
-                // Set the click event
-                hyperlink.Click += (Link_Click);  
-                // Formatting
-                hyperlink.UnderlineStyle = UnderlineStyle.None;
-                hyperlink.FontWeight = Microsoft.UI.Text.FontWeights.SemiBold;
-
-                // Merges run and hyperlink
-                hyperlink.Inlines.Add(run);   
-                Italic italic = new Italic();
-                italic.Inlines.Add(hyperlink);
-
-                // Adds link to textbox
-                Paragraph paragraph = new Paragraph();
-                paragraph.Inlines.Add(italic);
-                linkList.Blocks.Add(paragraph);   
-            }
-        }
-
-        private async void Link_Click(object sender, RoutedEventArgs e)
-        {
-            string filePath = "C:\\Users\\hohlm\\Documents\\wtf.rtf";
-            StorageFile file = await StorageFile.GetFileFromPathAsync(filePath); ;
-           
-            //File load code. See Open Button for commented code
-            if (file != null)
-            {
-                try
-                {
-                    var randAccStream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                    editor.Document.LoadFromStream(Microsoft.UI.Text.TextSetOptions.FormatRtf, randAccStream);
-
                     using (var sr = new StreamReader(randAccStream.AsStream()))
                     {
+                        // find final }
                         int count = 0, stop = 0;
                         while (stop < 1)
                         {
@@ -201,6 +72,21 @@ namespace DraconianWorldbuilder
                         sr.ReadLine();
                         TitleBox.Text = sr.ReadLine();
                         SummaryBox.Text = sr.ReadLine();
+
+                        linkButtonList.Children.Clear();
+                        links.Clear();
+                        while (!sr.EndOfStream)
+                        {
+                            HyperlinkButton linkButton = new HyperlinkButton();
+                            linkButton.Content = sr.ReadLine();
+                            linkButton.Click += (Link_Click);
+
+                            links.Add(sr.ReadLine());
+                            int slot = links.Count - 1;
+                            linkButton.Name = "" + slot;
+
+                            linkButtonList.Children.Add(linkButton);
+                        }
                     }
                 }
                 catch (Exception)
@@ -215,6 +101,112 @@ namespace DraconianWorldbuilder
                     await errorDialog.ShowAsync();
                 }
             }
+        }
+
+        private async void OpenButton_Click(object sender, RoutedEventArgs e)
+        {
+            var openPicker = new FileOpenPicker
+            {
+                SuggestedStartLocation = PickerLocationId.DocumentsLibrary
+            };
+            openPicker.FileTypeFilter.Add(".rtf");
+
+            // Get the current window's HWND by passing in the Window object
+            var hwnd = WindowNative.GetWindowHandle(this);
+            // Associate the HWND with the file picker
+            InitializeWithWindow.Initialize(openPicker, hwnd);
+
+            var file = await openPicker.PickSingleFileAsync();
+            string filePath = file.Path;
+            loadFile(filePath);
+        }
+
+        private async void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            var savePicker = new FileSavePicker
+            {
+                SuggestedStartLocation = PickerLocationId.DocumentsLibrary,
+                SuggestedFileName = "New Document"
+            };
+            savePicker.FileTypeChoices.Add("Rich Text", new List<string>() { ".rtf" });
+
+            var hwnd = WindowNative.GetWindowHandle(this);
+            InitializeWithWindow.Initialize(savePicker, hwnd);
+
+            Windows.Storage.StorageFile file = await savePicker.PickSaveFileAsync();
+            if (file != null)
+            {
+                // Prevent updates to the remote version of the file until we
+                // finish making changes and call CompleteUpdatesAsync.
+                Windows.Storage.CachedFileManager.DeferUpdates(file);
+
+                // Write to file
+                var randAccStream = await file.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite);
+                editor.Document.SaveToStream(Microsoft.UI.Text.TextGetOptions.FormatRtf, randAccStream);
+
+                using (var sw = new StreamWriter(randAccStream.AsStream()))
+                {
+                    sw.WriteLine();
+                    sw.WriteLine(TitleBox.Text);
+                    sw.WriteLine(SummaryBox.Text);
+                    //Woo. Now we need to get a list of children
+                    foreach(HyperlinkButton hypeButt in linkButtonList.Children)
+                    {
+                        sw.WriteLine(hypeButt.Content);
+                        int index = Int32.Parse(hypeButt.Name);
+                        sw.WriteLine(links[index]);
+                    }
+                }
+
+                // Let Windows know that we're finished changing the file so the
+                // other app can update the remote version of the file.
+                Windows.Storage.Provider.FileUpdateStatus status = await Windows.Storage.CachedFileManager.CompleteUpdatesAsync(file);
+                if (status != Windows.Storage.Provider.FileUpdateStatus.Complete)
+                {
+                    var errorBox = new Windows.UI.Popups.MessageDialog("File " + file.Name + " couldn't be saved.");
+                    await errorBox.ShowAsync();
+                }
+            }
+        }
+
+        private async void LinkButton_Click(object sender, RoutedEventArgs e)
+        {
+            //Microsoft.UI.Text.ITextSelection selectedText = editor.Document.Selection;
+            if (LinkBox.Text != "")
+            {
+                var openPicker = new FileOpenPicker
+                {
+                    SuggestedStartLocation = PickerLocationId.DocumentsLibrary
+                };
+                openPicker.FileTypeFilter.Add(".rtf");
+                var hwnd = WindowNative.GetWindowHandle(this);
+                InitializeWithWindow.Initialize(openPicker, hwnd);
+
+                var file = await openPicker.PickSingleFileAsync();
+                if (file != null)
+                {
+                    HyperlinkButton linkButton = new HyperlinkButton();
+                    linkButton.Content = LinkBox.Text;
+                    linkButton.Click += (Link_Click);
+                    // This returns the filepath the link should path to
+                    string filePath = file.Path;
+
+                    links.Add(filePath);
+                    int index = links.Count-1;
+                    linkButton.Name = "" + index;
+
+                    linkButtonList.Children.Add(linkButton);
+                }
+            }
+        }
+
+        private List<string> links = new List<string>();
+
+        private void Link_Click(object sender, RoutedEventArgs e)
+        {
+            int index = Int32.Parse((sender as HyperlinkButton).Name);
+            string filePath = links[index];
+            loadFile(filePath);
         }
 
         private void BoldButton_Click(object sender, RoutedEventArgs e)
