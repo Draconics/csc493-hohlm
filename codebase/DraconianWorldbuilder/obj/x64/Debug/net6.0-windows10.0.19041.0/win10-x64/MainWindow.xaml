@@ -6,11 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <RelativePanel HorizontalAlignment="Stretch">
-        <StackPanel x:ConnectionId='2' Name="stackPanel" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="800"
+    <RelativePanel x:ConnectionId='2' Name="bigPanel" HorizontalAlignment="Stretch">
+        <StackPanel x:ConnectionId='3' Name="stackPanel" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="800"
                     RelativePanel.AlignHorizontalCenterWithPanel="True">
-            <TextBox x:ConnectionId='4' Name="TitleBox" Header="Article Title:" PlaceholderText="Type your article title here"/>
-            <TextBox x:ConnectionId='5' Name="SummaryBox"  Header="Summary:" PlaceholderText="Type your summary here"
+            <TextBox x:ConnectionId='7' Name="TitleBox" Header="Article Title:" PlaceholderText="Type your article title here"/>
+            <TextBox x:ConnectionId='8' Name="SummaryBox"  Header="Summary:" PlaceholderText="Type your summary here"
                      Height="100" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
 
             <RelativePanel HorizontalAlignment="Stretch">
@@ -20,35 +20,37 @@
                     </Style>
                 </RelativePanel.Resources>
             
-                <AppBarButton x:ConnectionId='7' x:Name="openFileButton" Icon="OpenFile"
+                <AppBarButton x:ConnectionId='10' x:Name="openFileButton" Icon="OpenFile"
                                               ToolTipService.ToolTip="Open file"/>
-                <AppBarButton x:ConnectionId='8' Icon="Save"                         
+                <AppBarButton x:ConnectionId='11' Icon="Save"                         
                       ToolTipService.ToolTip="Save file"
                       RelativePanel.RightOf="openFileButton" Margin="8,0,0,0"/>
 
-                <AppBarButton x:ConnectionId='9' x:Name="linkButton" Icon="Link"                         
+                <AppBarButton x:ConnectionId='12' x:Name="linkButton" Icon="Link"                         
                       ToolTipService.ToolTip="Link" RelativePanel.LeftOf="LinkBox" Margin="0,0,8,0"/>
-                <TextBox x:ConnectionId='10' Name="LinkBox" PlaceholderText="Link goes here" Width="300"
+                <TextBox x:ConnectionId='13' Name="LinkBox" PlaceholderText="Link goes here" Width="300"
                          RelativePanel.LeftOf="boldButton" Margin="0,8,8,0"/>
              
-                <AppBarButton x:ConnectionId='11' x:Name="boldButton" Icon="Bold"                         
+                <AppBarButton x:ConnectionId='14' x:Name="boldButton" Icon="Bold"                         
                       ToolTipService.ToolTip="Bold" RelativePanel.LeftOf="italicButton" Margin="0,0,8,0"/>
-                <AppBarButton x:ConnectionId='12' x:Name="italicButton" Icon="Italic"                           
+                <AppBarButton x:ConnectionId='15' x:Name="italicButton" Icon="Italic"                           
                       ToolTipService.ToolTip="Italic" RelativePanel.LeftOf="underlineButton" Margin="0,0,8,0"/>
-                <AppBarButton x:ConnectionId='13' x:Name="underlineButton" Icon="Underline"                              
+                <AppBarButton x:ConnectionId='16' x:Name="underlineButton" Icon="Underline"                              
                       ToolTipService.ToolTip="Underline" RelativePanel.AlignRightWithPanel="True"/>
 
             </RelativePanel>
-            <RichEditBox x:ConnectionId='6' x:Name="editor" Height="450" RelativePanel.Below="openFileButton"
+            <RichEditBox x:ConnectionId='9' x:Name="editor" Height="450" RelativePanel.Below="openFileButton"
                      RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
 
         </StackPanel>
-        <RichTextBlock x:ConnectionId='3' x:Name="linkList" TextWrapping="Wrap" RelativePanel.RightOf="stackPanel">
-            <Paragraph>
-                This is flow content and you can
-                <Bold>edit me!</Bold>
-            </Paragraph>
-        </RichTextBlock>
+        <StackPanel x:ConnectionId='4' x:Name="sidePanel" RelativePanel.RightOf="stackPanel" Margin="8,32,0,0">
+            <RichTextBlock x:ConnectionId='5' x:Name="linkList" TextWrapping="Wrap">
+                <Paragraph>
+                    Linked Files:
+                </Paragraph>
+            </RichTextBlock>
+            <StackPanel x:ConnectionId='6' x:Name="linkButtonList"></StackPanel>
+        </StackPanel>
     </RelativePanel>
 </Window>
 

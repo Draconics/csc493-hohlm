@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <RelativePanel HorizontalAlignment="Stretch">
+    <RelativePanel Name="bigPanel" HorizontalAlignment="Stretch">
         <StackPanel Name="stackPanel" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="800"
                     RelativePanel.AlignHorizontalCenterWithPanel="True">
             <TextBox Name="TitleBox" Header="Article Title:" PlaceholderText="Type your article title here"/>
@@ -43,11 +43,13 @@
                      RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
 
         </StackPanel>
-        <RichTextBlock x:Name="linkList" TextWrapping="Wrap" RelativePanel.RightOf="stackPanel">
-            <Paragraph>
-                This is flow content and you can
-                <Bold>edit me!</Bold>
-            </Paragraph>
-        </RichTextBlock>
+        <StackPanel x:Name="sidePanel" RelativePanel.RightOf="stackPanel" Margin="8,32,0,0">
+            <RichTextBlock x:Name="linkList" TextWrapping="Wrap">
+                <Paragraph>
+                    Linked Files:
+                </Paragraph>
+            </RichTextBlock>
+            <StackPanel x:Name="linkButtonList"></StackPanel>
+        </StackPanel>
     </RelativePanel>
 </Window>
