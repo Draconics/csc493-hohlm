@@ -10,34 +10,34 @@
     <PackageArchitecture>x64</PackageArchitecture>
     <PackageIdentityName>5a65796b-cb1b-47cf-a14b-af1f68bb3d03</PackageIdentityName>
     <PackageIdentityPublisher>CN=hohlm</PackageIdentityPublisher>
-    <IntermediateOutputPath>C:\Users\hohlm\Source\Repos\csc493-hohlm\codebase\DraconianWorldbuilder\obj\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\obj\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\</IntermediateOutputPath>
     <RemoteDeploymentType>CopyToDevice</RemoteDeploymentType>
     <PackageRegistrationPath></PackageRegistrationPath>
     <RemoveNonLayoutFiles>false</RemoveNonLayoutFiles>
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
-    <LayoutDir>C:\Users\hohlm\Source\Repos\csc493-hohlm\codebase\DraconianWorldbuilder\bin\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\AppX</LayoutDir>
+    <LayoutDir>C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\bin\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\AppX</LayoutDir>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Users\hohlm\Source\Repos\csc493-hohlm\codebase\DraconianWorldbuilder\bin\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
+    <AppXManifest Include="C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\bin\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Users\hohlm\Source\Repos\csc493-hohlm\codebase\DraconianWorldbuilder\bin\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\resources.pri">
+    <AppxPackagedFile Include="C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\bin\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\hohlm\Source\Repos\csc493-hohlm\codebase\DraconianWorldbuilder\bin\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\DraconianWorldbuilder.runtimeconfig.json">
+    <AppxPackagedFile Include="C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\bin\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\DraconianWorldbuilder.runtimeconfig.json">
       <PackagePath>DraconianWorldbuilder.runtimeconfig.json</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\hohlm\Source\Repos\csc493-hohlm\codebase\DraconianWorldbuilder\bin\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\DraconianWorldbuilder.dll">
+    <AppxPackagedFile Include="C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\bin\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\DraconianWorldbuilder.dll">
       <PackagePath>DraconianWorldbuilder.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\hohlm\Source\Repos\csc493-hohlm\codebase\DraconianWorldbuilder\obj\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\apphost.exe">
+    <AppxPackagedFile Include="C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\obj\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>DraconianWorldbuilder.exe</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\hohlm\Source\Repos\csc493-hohlm\codebase\DraconianWorldbuilder\bin\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\DraconianWorldbuilder.deps.json">
+    <AppxPackagedFile Include="C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\bin\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\DraconianWorldbuilder.deps.json">
       <PackagePath>DraconianWorldbuilder.deps.json</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hohlm\.nuget\packages\microsoft.netcore.app.runtime.win-x64\6.0.8\runtimes\win-x64\lib\net6.0\Microsoft.CSharp.dll">
@@ -748,25 +748,25 @@
     <AppxPackagedFile Include="C:\Users\hohlm\.nuget\packages\microsoft.windowsappsdk\1.1.3\runtimes\win10-x64\native\Microsoft.WindowsAppRuntime.Bootstrap.dll">
       <PackagePath>Microsoft.WindowsAppRuntime.Bootstrap.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\hohlm\Source\Repos\csc493-hohlm\codebase\DraconianWorldbuilder\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\hohlm\Source\Repos\csc493-hohlm\codebase\DraconianWorldbuilder\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\hohlm\Source\Repos\csc493-hohlm\codebase\DraconianWorldbuilder\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\hohlm\Source\Repos\csc493-hohlm\codebase\DraconianWorldbuilder\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\hohlm\Source\Repos\csc493-hohlm\codebase\DraconianWorldbuilder\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\hohlm\Source\Repos\csc493-hohlm\codebase\DraconianWorldbuilder\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\hohlm\Source\Repos\csc493-hohlm\codebase\DraconianWorldbuilder\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
     </AppxPackagedFile>
   </ItemGroup>

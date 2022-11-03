@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hohlm\\Source\\Repos\\csc493-hohlm\\codebase\\DraconianWorldbuilder\\DraconianWorldbuilder.csproj": {}
+    "C:\\Users\\hohlm\\source\\repos\\csc493-hohlm\\codebase\\DraconianWorldbuilder\\DraconianWorldbuilder.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hohlm\\Source\\Repos\\csc493-hohlm\\codebase\\DraconianWorldbuilder\\DraconianWorldbuilder.csproj": {
+    "C:\\Users\\hohlm\\source\\repos\\csc493-hohlm\\codebase\\DraconianWorldbuilder\\DraconianWorldbuilder.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hohlm\\Source\\Repos\\csc493-hohlm\\codebase\\DraconianWorldbuilder\\DraconianWorldbuilder.csproj",
+        "projectUniqueName": "C:\\Users\\hohlm\\source\\repos\\csc493-hohlm\\codebase\\DraconianWorldbuilder\\DraconianWorldbuilder.csproj",
         "projectName": "DraconianWorldbuilder",
-        "projectPath": "C:\\Users\\hohlm\\Source\\Repos\\csc493-hohlm\\codebase\\DraconianWorldbuilder\\DraconianWorldbuilder.csproj",
+        "projectPath": "C:\\Users\\hohlm\\source\\repos\\csc493-hohlm\\codebase\\DraconianWorldbuilder\\DraconianWorldbuilder.csproj",
         "packagesPath": "C:\\Users\\hohlm\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hohlm\\Source\\Repos\\csc493-hohlm\\codebase\\DraconianWorldbuilder\\obj\\",
+        "outputPath": "C:\\Users\\hohlm\\source\\repos\\csc493-hohlm\\codebase\\DraconianWorldbuilder\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
