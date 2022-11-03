@@ -34,12 +34,12 @@ namespace DraconianWorldbuilder
             this.InitializeComponent();
         }
 
-        private async void LoadFile(string filePath)
+        private async void Load_File(string filePath)
         {
-            StorageFile file = await StorageFile.GetFileFromPathAsync(filePath);
-            if (file != null)
+            try
             {
-                try
+                StorageFile file = await StorageFile.GetFileFromPathAsync(filePath);
+                if (file != null)
                 {
                     //IRandomAccessStreamWithContentType
                     Windows.Storage.Streams.IRandomAccessStream randAccStream = await file.OpenAsync(FileAccessMode.Read);
@@ -82,18 +82,19 @@ namespace DraconianWorldbuilder
                     }
                     LinkBox.Text = "";
                 }
-                catch (Exception)
-                {
-                    ContentDialog errorDialog = new()
-                    {
-                        Title = "File open error",
-                        Content = "Sorry, I couldn't open the file.",
-                        PrimaryButtonText = "Ok"
-                    };
-
-                    await errorDialog.ShowAsync();
-                }
             }
+            catch (Exception)
+            {
+                ContentDialog errorDialog = new()
+                {
+                    Title = "File open error",
+                    Content = "File no longer exists.",
+                    PrimaryButtonText = "Ok"
+                };
+                errorDialog.XamlRoot = bigPanel.XamlRoot;
+                await errorDialog.ShowAsync();
+            }
+
         }
 
         private async void OpenButton_Click(object sender, RoutedEventArgs e)
@@ -110,8 +111,11 @@ namespace DraconianWorldbuilder
             InitializeWithWindow.Initialize(openPicker, hwnd);
 
             StorageFile file = await openPicker.PickSingleFileAsync();
-            string filePath = file.Path;
-            LoadFile(filePath);
+            if (file != null)
+            {
+                string filePath = file.Path;
+                Load_File(filePath);
+            }
         }
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -178,6 +182,7 @@ namespace DraconianWorldbuilder
 
             Button killButton = new()
             {
+                Content = "x",
                 Name = "k" + index
             };
             killButton.Click += KillButton_Click;
@@ -211,6 +216,7 @@ namespace DraconianWorldbuilder
                 if (file != null)
                 {
                     Generate_Link(LinkBox.Text, file.Path);
+                    LinkBox.Text = "";
                 }
             }
         }
@@ -219,7 +225,7 @@ namespace DraconianWorldbuilder
         {
             int index = Int32.Parse(s: (sender as HyperlinkButton).Name[1..]);
             string filePath = links[index];
-            LoadFile(filePath);
+            Load_File(filePath);
         }
 
         private void KillButton_Click(object sender, RoutedEventArgs e)
