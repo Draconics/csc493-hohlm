@@ -1,15 +1,20 @@
 # Design Document
 ## Main Window
   Sets initilization values
+## Methods 
+### Load_File()
+  Code for loading a file. Calls Generate_Link() for each link saved in the file
+### Generate_Link()
+  Adds a new link to a page
 ## Click Events
 ### OpenButton_Click()
-  Loads a new file
+  Opens a file picker, then feeds that file to Load_File()
 ### SaveButton_Click()
   Saves current file
 ### LinkButton_Click()
-  Creates a new link
+  Opens a file picker, then feeds that file to Generate_Link()
 ### Link_Click()
-  Loads file from link
+  Feeds the file associated with the link to Load_File()
 ### BoldButton_Click()
   Formats selected text bold
 ### ItalicButton_Click()
