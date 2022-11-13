@@ -75,12 +75,9 @@ namespace DraconianWorldbuilder
                         links.Clear();
                         while (!sr.EndOfStream)
                         {
-                            String linkText = sr.ReadLine();
-                            String linkFile = sr.ReadLine();
-                            Generate_Link(linkText, linkFile);
+                            Generate_Link(sr.ReadLine());
                         }
                     }
-                    LinkBox.Text = "";
                 }
             }
             catch (Exception)
@@ -146,11 +143,10 @@ namespace DraconianWorldbuilder
                     sw.WriteLine();
                     sw.WriteLine(TitleBox.Text);
                     sw.WriteLine(SummaryBox.Text);
-                    //Woo. Now we need to get a list of children
-                    foreach(HyperlinkButton hypeButt in linkButtonList.Children.Cast<HyperlinkButton>())
+                    //Woo. Now we need to get a list of links
+                    foreach(StackPanel hypeButt in linkButtonList.Children.Cast<StackPanel>())
                     {
-                        sw.WriteLine(hypeButt.Content);
-                        int index = Int32.Parse(hypeButt.Name);
+                        int index = Int32.Parse(s: hypeButt.Name[1..]);
                         sw.WriteLine(links[index]);
                     }
                 }
@@ -168,12 +164,55 @@ namespace DraconianWorldbuilder
 
         private List<string> links = new();
 
-        private void Generate_Link(string linkText, string filePath)
+        private List<string> linkSummaries = new();
+
+        private async void Generate_Link(string filePath)
         {
+            // Retrieves link metadata
+            String titleText = "";
+            String summary = "";
+            try
+            {
+                StorageFile file = await StorageFile.GetFileFromPathAsync(filePath);
+                if (file != null)
+                {
+                    Windows.Storage.Streams.IRandomAccessStream randAccStream = await file.OpenAsync(FileAccessMode.Read);
+                    using (StreamReader sr = new(randAccStream.AsStream()))
+                    {
+                        // find final }
+                        int count = 0, stop = 0;
+                        while (stop < 1)
+                        {
+                            string junk = sr.ReadLine();
+                            for (int i = 0; i < junk.Length; i++)
+                            {
+                                if (junk[i] == '{')
+                                {
+                                    count++;
+                                }
+                                else if (junk[i] == '}')
+                                {
+                                    count--;
+                                }
+                            }
+                            if (count == 0)
+                                stop++;
+                        }
+                        sr.ReadLine();
+                        titleText = sr.ReadLine();
+                        summary = sr.ReadLine();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                titleText = "File not found";
+            }
             // Backend indexing of the file path
             links.Add(filePath);
+            linkSummaries.Add(summary);
             int index = links.Count - 1;
-
+            // Create the UI elements for the link
             StackPanel leStack = new()
             {
                 Orientation = Orientation.Horizontal,
@@ -189,7 +228,7 @@ namespace DraconianWorldbuilder
 
             HyperlinkButton linkButton = new()
             {
-                Content = linkText,
+                Content = titleText,
                 Name = "l" + index
             };
             linkButton.Click += Link_Click;
@@ -201,23 +240,19 @@ namespace DraconianWorldbuilder
 
         private async void LinkButton_Click(object sender, RoutedEventArgs e)
         {
-            if (LinkBox.Text != "")
+            // File picker business
+            FileOpenPicker openPicker = new()
             {
-                // File picker business
-                FileOpenPicker openPicker = new()
-                {
-                    SuggestedStartLocation = PickerLocationId.DocumentsLibrary
-                };
-                openPicker.FileTypeFilter.Add(".rtf");
-                IntPtr hwnd = WindowNative.GetWindowHandle(this);
-                InitializeWithWindow.Initialize(openPicker, hwnd);
+                SuggestedStartLocation = PickerLocationId.DocumentsLibrary
+            };
+            openPicker.FileTypeFilter.Add(".rtf");
+            IntPtr hwnd = WindowNative.GetWindowHandle(this);
+            InitializeWithWindow.Initialize(openPicker, hwnd);
 
-                StorageFile file = await openPicker.PickSingleFileAsync();
-                if (file != null)
-                {
-                    Generate_Link(LinkBox.Text, file.Path);
-                    LinkBox.Text = "";
-                }
+            StorageFile file = await openPicker.PickSingleFileAsync();
+            if (file != null)
+            {
+                Generate_Link(file.Path);
             }
         }
 

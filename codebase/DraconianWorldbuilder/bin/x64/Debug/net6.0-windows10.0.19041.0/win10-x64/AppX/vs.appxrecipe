@@ -29,29 +29,29 @@
     <AppXManifest Include="C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\bin\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2022-11-03T18:18:03.438</Modified>
+      <Modified>2022-11-13T20:23:05.046</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\bin\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2022-11-03T18:17:24.193</Modified>
+      <Modified>2022-11-13T20:23:04.661</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\bin\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\DraconianWorldbuilder.runtimeconfig.json">
       <PackagePath>DraconianWorldbuilder.runtimeconfig.json</PackagePath>
-      <Modified>2022-11-03T17:57:34.278</Modified>
+      <Modified>2022-11-07T21:27:32.625</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\bin\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\DraconianWorldbuilder.dll">
       <PackagePath>DraconianWorldbuilder.dll</PackagePath>
-      <Modified>2022-11-03T18:18:02.518</Modified>
+      <Modified>2022-11-13T20:23:04.376</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\obj\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>DraconianWorldbuilder.exe</PackagePath>
-      <Modified>2022-11-03T18:18:02.679</Modified>
+      <Modified>2022-11-13T20:23:04.423</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hohlm\source\repos\csc493-hohlm\codebase\DraconianWorldbuilder\bin\x64\Debug\net6.0-windows10.0.19041.0\win10-x64\DraconianWorldbuilder.deps.json">
       <PackagePath>DraconianWorldbuilder.deps.json</PackagePath>
-      <Modified>2022-11-03T17:57:33.591</Modified>
+      <Modified>2022-11-07T21:27:32.412</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hohlm\.nuget\packages\microsoft.netcore.app.runtime.win-x64\6.0.8\runtimes\win-x64\lib\net6.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
