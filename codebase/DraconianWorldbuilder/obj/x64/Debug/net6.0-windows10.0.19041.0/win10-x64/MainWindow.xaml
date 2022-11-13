@@ -19,28 +19,24 @@
                         <Setter Property="IsCompact" Value="True"/>
                     </Style>
                 </RelativePanel.Resources>
-            
-                <AppBarButton x:ConnectionId='10' x:Name="openFileButton" Icon="OpenFile"
-                                              ToolTipService.ToolTip="Open file"/>
-                <AppBarButton x:ConnectionId='11' Icon="Save"                         
-                      ToolTipService.ToolTip="Save file"
-                      RelativePanel.RightOf="openFileButton" Margin="8,0,0,0"/>
 
-                <AppBarButton x:ConnectionId='12' x:Name="linkButton" Icon="Link"                         
-                      ToolTipService.ToolTip="Link" RelativePanel.LeftOf="LinkBox" Margin="0,0,8,0"/>
-                <TextBox x:ConnectionId='13' Name="LinkBox" PlaceholderText="Link goes here" Width="300"
-                         RelativePanel.LeftOf="boldButton" Margin="0,8,8,0"/>
-             
-                <AppBarButton x:ConnectionId='14' x:Name="boldButton" Icon="Bold"                         
-                      ToolTipService.ToolTip="Bold" RelativePanel.LeftOf="italicButton" Margin="0,0,8,0"/>
-                <AppBarButton x:ConnectionId='15' x:Name="italicButton" Icon="Italic"                           
-                      ToolTipService.ToolTip="Italic" RelativePanel.LeftOf="underlineButton" Margin="0,0,8,0"/>
-                <AppBarButton x:ConnectionId='16' x:Name="underlineButton" Icon="Underline"                              
-                      ToolTipService.ToolTip="Underline" RelativePanel.AlignRightWithPanel="True"/>
+                <AppBarButton x:ConnectionId='10' x:Name="openFileButton" Icon="OpenFile"                          
+                              ToolTipService.ToolTip="Open file"/>
+                <AppBarButton x:ConnectionId='11' x:Name="saveFileButton" Icon="Save"                          
+                              ToolTipService.ToolTip="Save file" RelativePanel.RightOf="openFileButton" Margin="8,0,0,0"/>
+                <AppBarButton x:ConnectionId='12' x:Name="linkButton" Icon="Link"                          
+                              ToolTipService.ToolTip="Link file" RelativePanel.RightOf="saveFileButton" Margin="0,0,8,0"/>
+
+                <AppBarButton x:ConnectionId='13' x:Name="boldButton" Icon="Bold"                         
+                              ToolTipService.ToolTip="Bold" RelativePanel.LeftOf="italicButton" Margin="0,0,8,0"/>
+                <AppBarButton x:ConnectionId='14' x:Name="italicButton" Icon="Italic"                           
+                              ToolTipService.ToolTip="Italic" RelativePanel.LeftOf="underlineButton" Margin="0,0,8,0"/>
+                <AppBarButton x:ConnectionId='15' x:Name="underlineButton" Icon="Underline"                              
+                              ToolTipService.ToolTip="Underline" RelativePanel.AlignRightWithPanel="True"/>
 
             </RelativePanel>
             <RichEditBox x:ConnectionId='9' x:Name="editor" Height="450" RelativePanel.Below="openFileButton"
-                     RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                         RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
 
         </StackPanel>
         <StackPanel x:ConnectionId='4' x:Name="sidePanel" RelativePanel.RightOf="stackPanel" Margin="8,32,0,0">

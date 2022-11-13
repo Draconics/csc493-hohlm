@@ -19,28 +19,24 @@
                         <Setter Property="IsCompact" Value="True"/>
                     </Style>
                 </RelativePanel.Resources>
-            
-                <AppBarButton x:Name="openFileButton" Icon="OpenFile"
-                     Click="OpenButton_Click" ToolTipService.ToolTip="Open file"/>
-                <AppBarButton Icon="Save" Click="SaveButton_Click"
-                      ToolTipService.ToolTip="Save file"
-                      RelativePanel.RightOf="openFileButton" Margin="8,0,0,0"/>
 
-                <AppBarButton x:Name="linkButton" Icon="Link" Click="LinkButton_Click"
-                      ToolTipService.ToolTip="Link" RelativePanel.LeftOf="LinkBox" Margin="0,0,8,0"/>
-                <TextBox Name="LinkBox" PlaceholderText="Link goes here" Width="300"
-                         RelativePanel.LeftOf="boldButton" Margin="0,8,8,0"/>
-             
+                <AppBarButton x:Name="openFileButton" Icon="OpenFile" Click="OpenButton_Click" 
+                              ToolTipService.ToolTip="Open file"/>
+                <AppBarButton x:Name="saveFileButton" Icon="Save" Click="SaveButton_Click" 
+                              ToolTipService.ToolTip="Save file" RelativePanel.RightOf="openFileButton" Margin="8,0,0,0"/>
+                <AppBarButton x:Name="linkButton" Icon="Link" Click="LinkButton_Click" 
+                              ToolTipService.ToolTip="Link file" RelativePanel.RightOf="saveFileButton" Margin="0,0,8,0"/>
+
                 <AppBarButton x:Name="boldButton" Icon="Bold" Click="BoldButton_Click"
-                      ToolTipService.ToolTip="Bold" RelativePanel.LeftOf="italicButton" Margin="0,0,8,0"/>
+                              ToolTipService.ToolTip="Bold" RelativePanel.LeftOf="italicButton" Margin="0,0,8,0"/>
                 <AppBarButton x:Name="italicButton" Icon="Italic" Click="ItalicButton_Click"
-                      ToolTipService.ToolTip="Italic" RelativePanel.LeftOf="underlineButton" Margin="0,0,8,0"/>
+                              ToolTipService.ToolTip="Italic" RelativePanel.LeftOf="underlineButton" Margin="0,0,8,0"/>
                 <AppBarButton x:Name="underlineButton" Icon="Underline" Click="UnderlineButton_Click"
-                      ToolTipService.ToolTip="Underline" RelativePanel.AlignRightWithPanel="True"/>
+                              ToolTipService.ToolTip="Underline" RelativePanel.AlignRightWithPanel="True"/>
 
             </RelativePanel>
             <RichEditBox x:Name="editor" Height="450" RelativePanel.Below="openFileButton"
-                     RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                         RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
 
         </StackPanel>
         <StackPanel x:Name="sidePanel" RelativePanel.RightOf="stackPanel" Margin="8,32,0,0">
