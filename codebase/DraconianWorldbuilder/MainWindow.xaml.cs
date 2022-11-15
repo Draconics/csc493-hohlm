@@ -67,7 +67,19 @@ namespace DraconianWorldbuilder
                             if (count == 0)
                                 stop++;
                         }
-                        sr.ReadLine();
+                        sr.ReadLine(); // Appease the null character gods
+                        string tag = sr.ReadLine();
+                        if (tag != "")
+                        {
+                            int spliceIndex = tag.IndexOf('|');
+                            TagBox.Text = tag[..spliceIndex];
+                            MultiBox.Text = tag[(spliceIndex + 1)..];
+                        }
+                        else
+                        {
+                            TagBox.Text = "";
+                            MultiBox.Text = "";
+                        }
                         TitleBox.Text = sr.ReadLine();
                         SummaryBox.Text = sr.ReadLine();
 
@@ -136,11 +148,37 @@ namespace DraconianWorldbuilder
 
                 // Write to file
                 Windows.Storage.Streams.IRandomAccessStream randAccStream = await file.OpenAsync(FileAccessMode.ReadWrite);
+                randAccStream.Size = 0; // Clears out the file if it existed
                 editor.Document.SaveToStream(Microsoft.UI.Text.TextGetOptions.FormatRtf, randAccStream);
 
                 using (StreamWriter sw = new(randAccStream.AsStream()))
                 {
-                    sw.WriteLine();
+                    sw.WriteLine();  // Appease the null character gods
+                    if (TagBox.Text != "" && MultiBox.Text != "")
+                    {
+                        try
+                        {
+                            double tagMulti = Convert.ToDouble(MultiBox.Text);
+                            sw.WriteLine(TagBox.Text + '|' + MultiBox.Text);
+                        }
+                        catch
+                        {
+                            sw.WriteLine();
+
+                            ContentDialog errorDialog = new()
+                            {
+                                Title = "Tag Parse Error",
+                                Content = "Replace the multiplyer with a number.",
+                                PrimaryButtonText = "Ok"
+                            };
+                            errorDialog.XamlRoot = bigPanel.XamlRoot;
+                            await errorDialog.ShowAsync();
+                        }
+                    }
+                    else
+                    {
+                        sw.WriteLine();
+                    }
                     sw.WriteLine(TitleBox.Text);
                     sw.WriteLine(SummaryBox.Text);
                     //Woo. Now we need to get a list of links
@@ -270,6 +308,19 @@ namespace DraconianWorldbuilder
             object leStack = linkButtonList.FindName(name);
             StackPanel sp = (StackPanel)leStack;
             linkButtonList.Children.Remove(sp);
+        }
+
+        private void EcoButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(TagBox.IsReadOnly == false) {
+                TagBox.IsReadOnly = true;
+                MultiBox.IsReadOnly = true;
+            }
+            else
+            {
+                TagBox.IsReadOnly = false;
+                MultiBox.IsReadOnly= false;
+            }
         }
 
         private void BoldButton_Click(object sender, RoutedEventArgs e)
