@@ -236,7 +236,8 @@ namespace DraconianWorldbuilder
                             if (count == 0)
                                 stop++;
                         }
-                        sr.ReadLine();
+                        sr.ReadLine();  // appease the null gods
+                        sr.ReadLine();  // skip the tag line
                         titleText = sr.ReadLine();
                         summary = sr.ReadLine();
                     }
