@@ -46,49 +46,47 @@ namespace DraconianWorldbuilder
                     // Load the file into the Document property of the RichEditBox.
                     editor.Document.LoadFromStream(Microsoft.UI.Text.TextSetOptions.FormatRtf, randAccStream);
 
-                    using (StreamReader sr = new(randAccStream.AsStream()))
+                    using StreamReader sr = new(randAccStream.AsStream());
+                    // find final }
+                    int count = 0, stop = 0;
+                    while (stop < 1)
                     {
-                        // find final }
-                        int count = 0, stop = 0;
-                        while (stop < 1)
+                        string junk = sr.ReadLine();
+                        for (int i = 0; i < junk.Length; i++)
                         {
-                            string junk = sr.ReadLine();
-                            for (int i = 0; i < junk.Length; i++)
+                            if (junk[i] == '{')
                             {
-                                if (junk[i] == '{')
-                                {
-                                    count++;
-                                }
-                                else if (junk[i] == '}')
-                                {
-                                    count--;
-                                }
+                                count++;
                             }
-                            if (count == 0)
-                                stop++;
+                            else if (junk[i] == '}')
+                            {
+                                count--;
+                            }
                         }
-                        sr.ReadLine(); // Appease the null character gods
-                        string tag = sr.ReadLine();
-                        if (tag != "")
-                        {
-                            int spliceIndex = tag.IndexOf('|');
-                            TagBox.Text = tag[..spliceIndex];
-                            MultiBox.Text = tag[(spliceIndex + 1)..];
-                        }
-                        else
-                        {
-                            TagBox.Text = "";
-                            MultiBox.Text = "";
-                        }
-                        TitleBox.Text = sr.ReadLine();
-                        SummaryBox.Text = sr.ReadLine();
+                        if (count == 0)
+                            stop++;
+                    }
+                    sr.ReadLine(); // Appease the null character gods
+                    string tag = sr.ReadLine();
+                    if (tag != "")
+                    {
+                        int spliceIndex = tag.IndexOf('|');
+                        tagBox.Text = tag[..spliceIndex];
+                        multiBox.Text = tag[(spliceIndex + 1)..];
+                    }
+                    else
+                    {
+                        tagBox.Text = "";
+                        multiBox.Text = "";
+                    }
+                    TitleBox.Text = sr.ReadLine();
+                    SummaryBox.Text = sr.ReadLine();
 
-                        linkButtonList.Children.Clear();
-                        links.Clear();
-                        while (!sr.EndOfStream)
-                        {
-                            Generate_Link(sr.ReadLine());
-                        }
+                    linkButtonList.Children.Clear();
+                    links.Clear();
+                    while (!sr.EndOfStream)
+                    {
+                        Generate_Link(sr.ReadLine());
                     }
                 }
             }
@@ -154,12 +152,12 @@ namespace DraconianWorldbuilder
                 using (StreamWriter sw = new(randAccStream.AsStream()))
                 {
                     sw.WriteLine();  // Appease the null character gods
-                    if (TagBox.Text != "" && MultiBox.Text != "")
+                    if (tagBox.Text != "" && multiBox.Text != "")
                     {
                         try
                         {
-                            double tagMulti = Convert.ToDouble(MultiBox.Text);
-                            sw.WriteLine(TagBox.Text + '|' + MultiBox.Text);
+                            double tagMulti = Convert.ToDouble(multiBox.Text);
+                            sw.WriteLine(tagBox.Text + '|' + multiBox.Text);
                         }
                         catch
                         {
@@ -200,9 +198,9 @@ namespace DraconianWorldbuilder
             }
         }
 
-        private List<string> links = new();
+        private readonly List<string> links = new();
 
-        private List<string> linkSummaries = new();
+        private readonly List<string> linkSummaries = new();
 
         private async void Generate_Link(string filePath)
         {
@@ -215,32 +213,30 @@ namespace DraconianWorldbuilder
                 if (file != null)
                 {
                     Windows.Storage.Streams.IRandomAccessStream randAccStream = await file.OpenAsync(FileAccessMode.Read);
-                    using (StreamReader sr = new(randAccStream.AsStream()))
+                    using StreamReader sr = new(randAccStream.AsStream());
+                    // find final }
+                    int count = 0, stop = 0;
+                    while (stop < 1)
                     {
-                        // find final }
-                        int count = 0, stop = 0;
-                        while (stop < 1)
+                        string junk = sr.ReadLine();
+                        for (int i = 0; i < junk.Length; i++)
                         {
-                            string junk = sr.ReadLine();
-                            for (int i = 0; i < junk.Length; i++)
+                            if (junk[i] == '{')
                             {
-                                if (junk[i] == '{')
-                                {
-                                    count++;
-                                }
-                                else if (junk[i] == '}')
-                                {
-                                    count--;
-                                }
+                                count++;
                             }
-                            if (count == 0)
-                                stop++;
+                            else if (junk[i] == '}')
+                            {
+                                count--;
+                            }
                         }
-                        sr.ReadLine();  // appease the null gods
-                        sr.ReadLine();  // skip the tag line
-                        titleText = sr.ReadLine();
-                        summary = sr.ReadLine();
+                        if (count == 0)
+                            stop++;
                     }
+                    sr.ReadLine();  // appease the null gods
+                    sr.ReadLine();  // skip the tag line
+                    titleText = sr.ReadLine();
+                    summary = sr.ReadLine();
                 }
             }
             catch (Exception)
@@ -311,16 +307,16 @@ namespace DraconianWorldbuilder
             linkButtonList.Children.Remove(sp);
         }
 
-        private void EcoButton_Click(object sender, RoutedEventArgs e)
+        private void TagLockButton_Click(object sender, RoutedEventArgs e)
         {
-            if(TagBox.IsReadOnly == false) {
-                TagBox.IsReadOnly = true;
-                MultiBox.IsReadOnly = true;
+            if(tagBox.IsReadOnly == false) {
+                tagBox.IsReadOnly = true;
+                multiBox.IsReadOnly = true;
             }
             else
             {
-                TagBox.IsReadOnly = false;
-                MultiBox.IsReadOnly= false;
+                tagBox.IsReadOnly = false;
+                multiBox.IsReadOnly= false;
             }
         }
 

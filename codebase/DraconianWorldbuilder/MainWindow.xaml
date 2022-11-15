@@ -40,15 +40,15 @@
 
         </StackPanel>
         <StackPanel x:Name="sidePanel" RelativePanel.RightOf="stackPanel" Margin="8,32,0,0">
-            <RichTextBlock x:Name="ecoBox" TextWrapping="Wrap">
+            <RichTextBlock x:Name="tagParagraph" TextWrapping="Wrap">
                 <Paragraph>
                     Economics Overview:
                 </Paragraph>
             </RichTextBlock>
             <StackPanel Orientation="Horizontal" Height="50">
-                <TextBox x:Name="TagBox" PlaceholderText="Tag name" Width="100" IsReadOnly="True"/>
-                <TextBox x:Name="MultiBox" PlaceholderText="1.0" Width="5" IsReadOnly="True"/>
-                <AppBarButton x:Name="ecoButton" Icon="SetLockScreen" Click="EcoButton_Click" 
+                <TextBox x:Name="tagBox" PlaceholderText="Tag name" Width="100" IsReadOnly="True"/>
+                <TextBox x:Name="multiBox" PlaceholderText="1.0" Width="5" IsReadOnly="True"/>
+                <AppBarButton x:Name="tagLockButton" Icon="SetLockScreen" Click="TagLockButton_Click" 
                               ToolTipService.ToolTip="(Un)lock tags"/>
             </StackPanel>
             
