@@ -13,9 +13,7 @@ Primary features I need are world processing, file storage, and the ability to l
 
 This application will run natively on windows machines.
 
-## Requirements
-
-[SRS](requirements.md)
+## [Requirements](requirements.md)
 
 ## [Design](design.md)
 
