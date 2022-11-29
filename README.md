@@ -37,7 +37,7 @@ This application will run natively on windows machines.
 - all who inspired the idea and/or the code in YourProjectName
 - other people you wish to acknowledge
 
-## License (not required initially)
+## License
 
-This project is licensed under the Copyleft License - see the wiki page (https://en.wikipedia.org/wiki/Software_license) for details
+This project is licensed under the Copyleft License
 
