@@ -17,9 +17,9 @@ This application will run natively on windows machines.
 
 [SRS](requirements.md)
 
-## Design
+## [Design](design.md)
 
-[Design](design.md)
+## [Test Plan](test.plan.md)
 
 ## Built With
 
@@ -30,6 +30,8 @@ This application will run natively on windows machines.
 ## Author
 
 - Michael Hohl: *Draconican Worldbuilder* [Draconics](https://github.com/Draconics)
+### About the Lead Developer
+- Michael Hohl is a senior Computer and Information Science major at Berea College. 
 
 ## Acknowledgments
 
