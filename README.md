@@ -1,5 +1,5 @@
 # *Draconian Worldbuilder*
-<img src="https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg">
+<img src="/codebase/DraconianWorldbuilder/Assets/Square150x150Logo.scale-200.png">
 
 ## [Project Concept](concept.md)
 
