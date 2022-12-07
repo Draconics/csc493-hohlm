@@ -1,4 +1,6 @@
 # *Draconian Worldbuilder*
+<img src="/codebase/DraconianWorldbuilder/Assets/Square150x150Logo.scale-200.png">
+
 ## [Project Concept](concept.md)
 
 ## Vision
@@ -13,13 +15,11 @@ Primary features I need are world processing, file storage, and the ability to l
 
 This application will run natively on windows machines.
 
-## Requirements
+## [Requirements](requirements.md)
 
-[SRS](requirements.md)
+## [Design](design.md)
 
-## Design
-
-[Design](design.md)
+## [Test Plan](test.plan.md)
 
 ## Built With
 
@@ -30,6 +30,8 @@ This application will run natively on windows machines.
 ## Author
 
 - Michael Hohl: *Draconican Worldbuilder* [Draconics](https://github.com/Draconics)
+### About the Lead Developer
+- Michael Hohl is a senior Computer and Information Science major at Berea College. 
 
 ## Acknowledgments
 
@@ -37,7 +39,7 @@ This application will run natively on windows machines.
 - all who inspired the idea and/or the code in YourProjectName
 - other people you wish to acknowledge
 
-## License (not required initially)
+## License
 
-This project is licensed under the Copyleft License - see the wiki page (https://en.wikipedia.org/wiki/Software_license) for details
+This project is licensed under the Copyleft License
 
